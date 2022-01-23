@@ -30,7 +30,7 @@ OUTFILE := cmdline
 BUILD_DIR  := build
 INC_DIR    := include
 LINK_DIR   := link
-SRC_DIRS   := src
+SRC_DIR    := src
 TEENSY_DIR := src/teensy
 
 # teensy platform configuration
@@ -41,7 +41,7 @@ PROJECT_DEFS := USB_SERIAL LAYOUT_US_ENGLISH USING_MAKEFILE
 
 LINK_FILE  := imxrt1062.ld
 
-SRCS := $(shell find $(SRC_DIRS) -name *.c -or -name *.cpp -or -name *.s)
+SRCS := $(shell find $(SRC_DIR) -name *.c -or -name *.cpp -or -name *.s)
 OBJS := $(SRCS:%=$(BUILD_DIR)/obj/%.o)
 DEPS := $(OBJS:.o=.d)
 
@@ -108,7 +108,7 @@ flash2: $(BUILD_DIR)/$(OUTFILE).hex
 .PHONY: hosttest
 hosttest:
 	@$(MKDIR_P) $(BUILD_DIR)
-	$(HOST_GPP) src/applic/main.cpp -o $(BUILD_DIR)/hosttest
+	$(HOST_GPP) $(SRC_DIR)/main.cpp -o $(BUILD_DIR)/hosttest
 
 #-----------------------------------------------------------------------
 # construct the teensy source file links

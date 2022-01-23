@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Teensy 4.0 Command Line Monitor
 //
-// Command line debug program the Teensy 4.0 development platform.
+// Command line monitor program the Teensy 4.0 development platform.
 //
 // Copyright (c) 2022 Robert I. Gike
 //
