@@ -93,13 +93,11 @@ edit:
 # My build runs in a VM (kvm guest) while the teensy is accessed through
 # a host USB port. So instead of calling the loader directly the .hex
 # file is scp'd to the host and the loader is run via ssh.
-.PHONY: flash
 flash: $(BUILD_DIR)/$(OUTFILE).hex
 	scp $< vm3700:~/teensy
 	ssh vm3700 "cd ~/teensy; ./$(LOADER) --mcu=TEENSY40 -s -w -v $(OUTFILE).hex"
 
 # Use this target when the teensy hardware is directly connected
-.PHONY: flash2
 flash2: $(BUILD_DIR)/$(OUTFILE).hex
 	$(LOADER) --mcu=TEENSY40 -s -w -v $<
 
