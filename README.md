@@ -119,11 +119,11 @@ Memory values may be read one at a time as bytes, shorts or words using the peek
 
 Memory values my be written one at a time as bytes, shorts or words using the poke, poke16 and poke32 commands.
 
-Operands may entered in the following formats:
-Decimal Number: 42, -89
-Hex Number: 0xdeaf (leading '0x' characters denote case insensitive hex characters follow)
-Octal Number: 0377 (leading '0' character denotes octal digits follow)
-Character: 'A (leading single quote denotes a single character literal follows)
+Operands may be entered in the following formats:
+- Decimal Number: 42, -89
+- Hex Number: 0xdeaf123 (leading '0x' characters indicate case insensitive hex characters follow)
+- Octal Number: 0377 (leading '0' character indicates octal digits follow)
+- Character: 'A (leading single quote indicates a single character literal follows)
 
 Makefile target 'hosttest' builds a version of the command line monitor which will execute in a Linux command line shell. In this build a quit command will be available to cleanly exit the program. Shell characters Ctrl-C and Ctrl-D may be used to force the program to terminate immediately.
 
