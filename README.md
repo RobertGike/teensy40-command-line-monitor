@@ -78,7 +78,54 @@ Flash the binary on the target hardware with this command:
     make flash
 
 ## Using the Monitor
-TBD
+At the command prompt ('>') type help<return> to get a list of commands:
+
+    > help
+           +  add ( a b -- a+b )
+           -  subtract ( a b -- a-b )
+           *  multiply ( a b -- a*b )
+           /  divide ( a b -- a/b )
+           .  print decimal top of stack ( a -- )
+          .h  print hex top of stack ( a -- )
+          .s  print decimal stack
+         .hs  print hex stack
+       blink  blink led ( count -- )
+        dmem  display byte memory ( address lines -- )
+      dmem16  display short memory ( address lines -- )
+      dmem32  display word memory ( address lines -- )
+        emit  print character top of stack ( a -- )
+        help  display help text
+         mod  modulo divide ( a b -- a mod b )
+        peek  display byte at address ( address -- )
+      peek16  display short at address ( address -- )
+      peek32  display word at address ( address -- )
+        poke  store byte at address ( address byte -- )
+      poke16  store short at address ( address short -- )
+      poke32  store word at address ( address word -- )
+       words  display list of command words
+        quit  quit the test program
+
+    Decimal number: 1234, -56
+        Hex number: 0x1234abcd
+      Octal number: 0377
+         Character: 'A
+    >
+
+The command line uses postfix notation where operators/commands follow their operands. Operands represented by signed decimal, hex, and octal numbers, and by character constants in the form: single quote + character are pushed onto a 16 level stack. The stack holds 32-bit values. Operators/commands take zero or more operands from the stack and perform their function. Some commands like .s, .hs, help and words do not alter the stack contents. Data stack overflow and underflow conditions are detected and reported.
+
+The memory display commands: dmem, dmem16 and dmem32 display memory from the specified 16 byte alligned address (rounded down), displaying bytes, shorts and words with each line representing 16 bytes of memory contents. The byte display (dmem) will also display the ascii character represented by each byte value. The short (dmem16) and word (dmem32) commands will display 8 16-bit short and 4 32-bit values respectively.
+
+Memory values may be read one at a time as bytes, shorts or words using the peek, peek16 and peek32 commands repspectively.
+
+Memory values my be written one at a time as bytes, shorts or words using the poke, poke16 and poke32 commands.
+
+Operands may entered in the following formats:
+Decimal Number: 42, -89
+Hex Number: 0xdeaf (leading '0x' characters denote case insensitive hex characters follow)
+Octal Number: 0377 (leading '0' character denotes octal digits follow)
+Character: 'A (leading single quote denotes a single character literal follows)
+
+Makefile target 'hosttest' builds a version of the command line monitor which will execute in a Linux command line shell. In this build a quit command will be available to cleanly exit the program. Shell characters Ctrl-C and Ctrl-D may be used to force the program to terminate immediately.
 
 ## License and Acknowledgements
 - The Teensy 4.0 Command Line Monitor program is Copyright Robert I. Gike under the Apache 2.0 license.
