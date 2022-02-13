@@ -26,6 +26,8 @@
 #endif
 
 // character defines
+#define CHAR_BKSP  0x7f  // Backspace key
+#define CHAR_BS    0x08
 #define CHAR_CR    0x0d
 #define CHAR_NL    0x0a
 #define CHAR_NULL  0x00
@@ -165,10 +167,19 @@ const char* tibfill() {
     while(true) {
         int b = Serial.read();
         if(b>0) {
+            if(char(b)==CHAR_BKSP || char(b)==CHAR_BS) {
+                if(tib_offset>0) {
+                    Serial.print(char(CHAR_BS));
+                    Serial.print(char(CHAR_SP));
+                    Serial.print(char(CHAR_BS));
+                    tib_offset--;
+                }
+                continue;
+            }
             tib[tib_offset] = char(b);
             if(tib_offset<int(sizeof(tib)-1)) tib_offset++;
             if(char(b)==CHAR_CR) {
-                Serial.println(' '); // echo
+                Serial.println(char(CHAR_SP)); // echo
                 tib_offset = 0;
                 return tib;
             }

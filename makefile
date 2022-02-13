@@ -76,7 +76,7 @@ help:
 
 #-----------------------------------------------------------------------
 .PHONY: all
-all: $(BUILD_DIR)/$(OUTFILE).hex
+all: testlinks $(BUILD_DIR)/$(OUTFILE).hex
 
 #-----------------------------------------------------------------------
 .PHONY: clean
@@ -123,6 +123,16 @@ teensylinks:
 	@$(MKDIR_P) $(LINK_DIR)
 	@$(RM_F) $(LINK_DIR)/$(LINK_FILE)
 	ln -s $(TEENSY4PATH)/$(LINK_FILE) $(LINK_DIR)/.
+
+#-----------------------------------------------------------------------
+# test for presence of file links
+.PHONY: testlinks
+testlinks:
+	@if ! [ -L $(LINK_DIR)/$(LINK_FILE) ] ; then \
+		echo "File link error"; \
+		echo "Have you run make teensylinks ?"; \
+		exit 1; \
+	fi
 
 #-----------------------------------------------------------------------
 # convert the output file from elf to hex
